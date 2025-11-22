@@ -1,0 +1,17 @@
+
+								10. tehtävän komennot
+
+1) Tulosta kaikki opiskelijat, joilla on tietokannassa hylätty arvosana 
+SELECT DISTINCT CONCAT(etunimi, ' ', sukunimi) AS "Hylätty arvosana" FROM opiskelija o JOIN arviointi a ON o.idopiskelija = a.idopiskelija WHERE arvosana = 0;
+
+2) Tulosta kaikki Musiikki-kurssin hyväksytysti suorittaneet
+SELECT CONCAT(etunimi, ' ',sukunimi) AS Läpäisseet FROM opiskelija o JOIN arviointi a ON o.idopiskelija = a.idopiskelija JOIN opintojakso oj ON oj.idopintojakso = a.idopintojakso WHERE arvosana > 0  AND tunnus = "MU9999";
+
+3) Mille kursseille Neil on osallistunut ?
+SELECT DISTINCT nimi AS "Kurssit joille Neil osallistuu" FROM opiskelija o JOIN arviointi a ON o.idopiskelija = a.idopiskelija JOIN opintojakso oj ON oj.idopintojakso = a.idopintojakso WHERE etunimi = "Neil";
+
+4) Mikä on Grantin suoritusten keskiarvo?
+SELECT AVG(arvosana) AS "Grantin keskiarvo" FROM opiskelija o JOIN arviointi a ON o.idopiskelija = a.idopiskelija WHERE etunimi = "Grant";
+
+5) Millä opintojaksoilla ei ole yhtään suoritusmerkintää ? 
+SELECT CONCAT(oj.idopintojakso, ' / ',nimi, ' / ',tunnus) as "Ei yhtään suoritusta" FROM opintojakso oj LEFT JOIN arviointi a ON a.idopintojakso = oj.idopintojakso WHERE a.idopintojakso IS NULL;
