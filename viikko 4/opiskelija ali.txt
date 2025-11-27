@@ -1,0 +1,38 @@
+DELIMITER$$
+DROP PROCEDURE IF EXISTS arvio
+CREATE PROCEDURE arvio (IN aoetunimi VARCHAR(45), IN aosukunimi VARCHAR(45), aoidopintojakso INT, aoarvosana INT)
+BEGIN
+	DECLARE aoidopiskelija INT DEFAULT NULL;
+	
+	
+
+	IF aoarvosana <0 OR aoarvosana >5 THEN
+	SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT='Arvosanan tulee olla välillä 0-5.';
+	END IF;
+
+	--ei toimi jos on useampi saman niminen opiskelija, 
+	--mutta koska tehtävän annossa haku nimellä eikä id niin tehdään näin perään LIMIT 1.
+	SET aoidopiskelija = (SELECT idopiskelija FROM opiskelija where etunimi = aoetunimi AND sukunimi = aosukunimi LIMIT 1);
+
+	IF aoidopiskelija IS NULL THEN
+	SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT='Opiskelijaa ei löydy';
+	END IF;
+	
+	IF NOT EXISTS (SELECT 1 FROM opintojakso WHERE idopintojakso = aoidopintojakso)
+	THEN
+	SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT='Kurssia ei löydy';
+	END IF;
+	
+	START TRANSACTION;
+	
+	
+	DELETE FROM arviointi WHERE idopiskelija = aoidopiskelija AND idopintojakso = aoidopintojakso;
+	INSERT INTO arviointi (idopiskelija, idopintojakso, arvosana, päivämäärä)
+	VALUES (aoidopiskelija, aoidopintojakso, aoarvosana, CURRENT_DATE());
+	
+	COMMIT;
+END$$
+DELIMITER ;
