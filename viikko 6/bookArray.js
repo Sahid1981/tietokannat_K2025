@@ -1,5 +1,4 @@
-const book = {
-bookArray : [
+const bookArray = [
 	{ id_book: 1, name: "Everything You Ever Wanted to Know", author: "Upton", isbn: "082305649x" },
 	{ id_book: 2, name: "Photography", author: "Vilppu", isbn: "205711499" },
 	{ id_book: 3, name: "Drawing Manual Vilppu", author: "Zelanshi", isbn: "1892053039" },
@@ -15,24 +14,16 @@ bookArray : [
 	{ id_book: 13, name: "Leadership Wisdom of Jesus", author: "Manz", isbn: "9781609940041" },
 	{ id_book: 14, name: "Business Law Today", author: "Miller", isbn: "9780324786156" },
 	{ id_book: 15, name: "Management Info Systems", author: "Marakas", isbn: "9780073376813" }
-],
+];
 
-getAllBooks() {
-	return this.bookArray;
-},
+console.log("type:", typeof bookArray);
 
-getOneBook(x) {
-	return this.bookArray.find(book => book.id_book === x);
-},
+console.log(JSON.stringify(bookArray, null, 2));
 
-addBook(id_book, name, author, isbn) {
-	const newBook = { id_book, name, author, isbn };
-	this.bookArray.push(newBook);
-	return newBook;
-}
+console.log("ensimmäinen tietue:", bookArray[0]);
 
-};
+console.log("ensimmäisen kirjan nimi:", bookArray[0].name); 
 
-console.log(book.getAllBooks());
-console.log(book.getOneBook(2)); 
-console.log(book.addBook(16, "Juhan Unelma", "Juha J", "1234567890"));
+console.log("kirjojen määrä:", bookArray.length);
+
+console.log("kaikkien kirjojen nimet:", bookArray.map(book => book.name));
