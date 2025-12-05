@@ -18,6 +18,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 module.exports = app;
+
 //middleware
 app.use('/app',
     function(req,res,next){
@@ -25,30 +26,28 @@ app.use('/app',
         next();
     }
 );
+
 //get- metodi
 app.get('/app', (req, res) => res.send('Saanko esitellä'));
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
+
 //get- metodi yhdellä parametrilla
 app.get("/app/:num", (req, res) => {
 
   res.send('appin numero ' + req.params.num);
 });
+
 //get- metodi kahdella parametrilla
 app.get("/app/:num/:name", (req, res) => {
 
     res.send('saanko esitellä ' + req.params.name + ' ' + req.params.num);
 });
-//get bonus
 
+//get bonus
 app.get('/app/:num/:name/:img', (req, res) => {
   const { num, name, img } = req.params;
-
-
-
   const imgUrl = `/images/${img}`;
-
-
   res.send('saanko esitellä ' + req.params.name + ' ' + req.params.num + `<br><img src="${imgUrl}" alt="${name}">`);
 });
 
