@@ -4,9 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 
@@ -28,8 +25,6 @@ const helmet = require('helmet')
 app.use(helmet())
 app.disable('x-powered-by');
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 //omat lisät
 const bookRouter = require('./routes/book');
@@ -42,6 +37,8 @@ const arviointiRouter = require('./routes/arviointi');
 app.use('/arviointi', arviointiRouter);
 const opintojaksoRouter = require('./routes/opintojakso');
 app.use('/opintojakso', opintojaksoRouter);
+const userRouter = require('./routes/user');
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
