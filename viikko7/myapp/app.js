@@ -36,6 +36,12 @@ const bookRouter = require('./routes/book');
 app.use('/book', bookRouter);
 const borrowerRouter = require('./routes/borrower');
 app.use('/borrower', borrowerRouter);
+const opiskelijaRouter = require('./routes/opiskelija');
+app.use('/opiskelija', opiskelijaRouter);
+const arviointiRouter = require('./routes/arviointi');
+app.use('/arviointi', arviointiRouter);
+const opintojaksoRouter = require('./routes/opintojakso');
+app.use('/opintojakso', opintojaksoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
