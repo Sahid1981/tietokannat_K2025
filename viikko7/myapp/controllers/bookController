@@ -1,0 +1,3 @@
+exports.allBooks = function(req, res) {
+  //call the model to get books from database
+};
