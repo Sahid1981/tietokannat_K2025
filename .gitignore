@@ -14,7 +14,7 @@ package.json
 .env.*
 
 bin/
-routes/
+
 public/
 dist/
 build/
