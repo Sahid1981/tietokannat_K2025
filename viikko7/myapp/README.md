@@ -1,4 +1,4 @@
-# MyApp API (book & borrower)
+# MyApp API
 
 Endpoints (base URL `http://localhost:3000` if app started with default Express generator):
 
